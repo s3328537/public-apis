@@ -49,9 +49,11 @@ def parse_readme():
             match = link_re.search(api_cell)
             if match:
                 api_name = match.group(1).strip()
+                api_link = match.group(2).strip()
                 # Some links might have spaces inside the parentheses if malformed, but regex handles most
             else:
                 api_name = api_cell.strip()
+                api_link = ""
 
             # If the description contains multiple | it will break the split.
             # But standard markdown tables escape | or don't use them in cells.
@@ -59,6 +61,7 @@ def parse_readme():
 
             apis.append({
                 "API": api_name,
+                "Link": api_link,
                 "Description": desc_cell,
                 "Auth": auth_cell,
                 "HTTPS": https_cell,
